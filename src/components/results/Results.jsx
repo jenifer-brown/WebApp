@@ -1,8 +1,12 @@
 import SingleResult from "./SingleResult";
 
+import Reporter from "../generator/Reporter";
+
 export default function Results(props) {
-	const { number, genre, decade, runtime, update, type } = props;
+	const { number, genre, decade, runtime, update, type, shouldReport } = props;
 	const [resultsArray, setResultsArray] = React.useState([]);
+	const [isLoaded, setIsLoaded] = React.useState(false);
+	const [numResults, setNumResults] = React.useState(0);
 	const movieData = React.useRef(undefined);
 	const showData = React.useRef(undefined);
 	const bookData = React.useRef(undefined);
@@ -188,30 +192,30 @@ export default function Results(props) {
 			const selectedResults = addResults();
 			let allResults = [];
 			if (type === "movies") {
-				allResults = selectedResults.map((entry) => (
-					<SingleResult
-						title={entry.title}
-						img={
-							entry.poster_path
-								? `https://image.tmdb.org/t/p/w500${entry.poster_path}`
-								: ""
-						}
-						year={entry.release_date.substring(0, 4)}
-						summary={entry.overview}
-						movieId={entry.id}
-						runtime={runtimeData.current.get(entry.title)}
-					/>
-				));
+				allResults = selectedResults.map((entry) => {
+					const imageSrc = entry.poster_path
+						? `https://image.tmdb.org/t/p/w500${entry.poster_path}`
+						: "";
+					return (
+						<SingleResult
+							title={entry.title}
+							img={imageSrc}
+							year={entry.release_date.substring(0, 4)}
+							summary={entry.overview}
+							movieId={entry.id}
+							runtime={runtimeData.current.get(entry.title)}
+						/>
+					);
+				});
 			} else if (type === "shows") {
 				allResults = selectedResults.map((entry) => {
+					const imageSrc = entry.backdrop_path
+						? `https://image.tmdb.org/t/p/w500${entry.backdrop_path}`
+						: "";
 					return (
 						<SingleResult
 							title={entry.name}
-							img={
-								entry.backdrop_path
-									? `https://image.tmdb.org/t/p/w500${entry.backdrop_path}`
-									: ""
-							}
+							img={imageSrc}
 							year={entry.first_air_date.substring(0, 4)}
 							summary={entry.overview}
 							movieId={entry.id}
@@ -219,6 +223,10 @@ export default function Results(props) {
 					);
 				});
 			} else if (type === "books") {
+				// if (selectedResults.length === 0) {
+				// 	allResults = [];
+				// 	return;
+				// }
 				allResults = selectedResults.map((entry) => {
 					return (
 						<SingleResult
@@ -231,10 +239,13 @@ export default function Results(props) {
 					);
 				});
 			}
-			if (allResults.length === 0) {
+			if (shouldReport && allResults.length === 0) {
+				setNumResults(0);
 				allResults.push(noResults.current);
+			} else {
+				setResultsArray(allResults);
+				setNumResults(allResults.length);
 			}
-			setResultsArray(allResults);
 		}
 		return () => {
 			console.log("done");
@@ -243,8 +254,9 @@ export default function Results(props) {
 
 	return (
 		<div className="results">
+			{shouldReport && <Reporter numResults={numResults} />}
 			{number === 0 && <h1>Select Suggestions</h1>}
-			{resultsArray}
+			{(shouldReport && numResults) > 0 && resultsArray}
 		</div>
 	);
 }

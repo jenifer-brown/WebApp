@@ -5,28 +5,29 @@ export default function Filter(props) {
 
 	return (
 		<>
-			<label>Decade</label>
-			<select
-				onChange={(e) => getFilters(e, "decade")}
-				id="decade"
-				name="decade"
-				value={props.decade}
-			>
-				<option value={undefined}>none</option>
-				<option value="2020">2020</option>
-				<option value="2010">2010</option>
-				<option value="2000">2000</option>
-				<option value="1990">1990</option>
-				<option value="1980">1980</option>
-				<option value="1970">1970</option>
-				<option value="1960">1960</option>
-				<option value="1950">1950</option>
-				<option value="1940">1940</option>
-			</select>
-			<br />
+			<div className="selectFilter">
+				<label className="filterLabel">Decade</label>
+				<select
+					onChange={(e) => getFilters(e, "decade")}
+					id="decade"
+					name="decade"
+					value={props.decade}
+				>
+					<option value={undefined}>none</option>
+					<option value="2020">2020</option>
+					<option value="2010">2010</option>
+					<option value="2000">2000</option>
+					<option value="1990">1990</option>
+					<option value="1980">1980</option>
+					<option value="1970">1970</option>
+					<option value="1960">1960</option>
+					<option value="1950">1950</option>
+					<option value="1940">1940</option>
+				</select>
+			</div>
 			{type !== "books" && (
-				<div>
-					<label>Genre</label>
+				<div className="selectFilter">
+					<label className="filterLabel">Genre</label>
 					<select
 						onChange={(e) => getFilters(e, "genre")}
 						id="genre"
@@ -43,10 +44,9 @@ export default function Filter(props) {
 					</select>
 				</div>
 			)}
-			<br />
 			{type === "movies" && (
-				<div>
-					<label>Max Runtime</label>
+				<div className="selectFilter">
+					<label className="filterLabel">Max Runtime</label>
 					<input
 						type="range"
 						min="10"
@@ -58,9 +58,12 @@ export default function Filter(props) {
 						onChangeCapture={(e) => props.getFilters(e, "runtime")}
 						value={props.runtime}
 					/>
-					<label> {props.runtime ? props.runtime : ""} mins</label>
+					<label className="filterLabel">
+						{props.runtime ? props.runtime : ""} mins
+					</label>
 				</div>
 			)}
+			{}
 		</>
 	);
 }

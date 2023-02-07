@@ -3,6 +3,8 @@ export default function SingleResult(props) {
 		props;
 	const resultId = `movie-${movieId}`;
 
+	const imgSrc = img ? img : "../../images/noimage.jpeg";
+
 	function bookLinkClick() {
 		switch (true) {
 			case !!bookUrl:
@@ -34,7 +36,7 @@ export default function SingleResult(props) {
 					value={bookLinkValue()}
 				/>
 			) : (
-				<img src={img ? img : "../../images/noimage.jpeg"} />
+				<img src={imgSrc} />
 			)}
 			<p>{summary}</p>
 		</div>

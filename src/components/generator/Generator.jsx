@@ -1,6 +1,5 @@
 import Action from "./Action";
 import Filter from "./Filter";
-import Tab from "./Tab";
 
 export default function Generator(props) {
 	const { className, generatorType, handleNumberClick } = props;

@@ -1,6 +1,6 @@
 #maincontent {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   text-align: center;
   background-color: #D9E4FF;
 }
@@ -19,6 +19,35 @@ h1 {
   background-color: aliceblue;
 }
 
+.aboutHeader {
+  margin: auto;
+  padding-top: 50px;
+}
+
+.aboutText {
+  margin-left: 10%;
+  margin-right: 10%;
+  color: black;
+  font-size: xx-large;
+  line-height: 150%;
+}
+
+.filterButton {
+  font-size: x-large;
+  margin: 5px;
+}
+
+.action {
+  margin-bottom: 20px;
+}
+
+select {
+  font-size: x-large;
+}
+
+.selectFilter {
+  margin-bottom: 20px;
+}
 
 .button {
   float: left;
@@ -40,64 +69,75 @@ h1 {
 .mainContainer {
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 100%;
+  grid-template-rows: 3rem auto;
+  row-gap: 10px;
   gap: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
-.generatorBox {
-  display: block;
-}
 .generator {
   grid-column: 1;
-  padding-top: 34.304px;
   height: 100%;
+  min-height: 450px;
   max-height: 80vh;
   max-width: 100%;
   background-color: #8DD2DD;
 }
 
+.filterLabel {
+  color: black;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.reporter {
+  margin-top: 50px;
+  color: black;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
 .resultsBox {
   grid-column: 2;
-  height: 100%;
-  max-height: 80vh;
-  margin-top: 60px;
+  display: block;
   background-color:#FAAF90;
-  overflow-y: auto;
-  align-content: center;
-  display: flex;
+  height: 80vh;
+  max-width: 99%;
+  overflow-y: scroll;
 }
 
 .results {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  row-gap: 10px;
+  justify-content: space-evenly;
   align-items: center;
-  height: 100%;
   width: 100%;
 }
 
 .results h1 {
-  margin-top: 0px;
+  margin-top: 50%;
+  padding: 0px;
 }
 
 .singleResult {
-  background-color: darkgrey;
-  display: block;
-  align-self: center;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 50px;
-  width: 95%;
-  max-height: fit-content;
+  background-color: darkgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  height:max-content;
 }
+
 .singleResult h1 {
   margin-top: 10px;
-  padding-top: 10px;
 }
 .singleResult img {
   width: 90%;
-  height: 90%;
   max-width: 600px;
   max-height: auto;
 }
@@ -105,15 +145,21 @@ h1 {
 .singleResult p {
   font-size: 20px;
   width: 90%;
-  margin: auto;
-  padding: 20px 0px 20px 0px;
-}
-.card {
-  padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.tabs {
+  display: flexbox;
+  align-content: center;
+  
+  margin-top: 10px;
+}
+
+.placeholder {
+  width: 30%;
 }
 
 .books-tab {
